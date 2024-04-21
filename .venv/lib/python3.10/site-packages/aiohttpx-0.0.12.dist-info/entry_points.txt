@@ -1,0 +1,2 @@
+[console_scripts]
+aiohttpx = aiohttpx.cli:run_cmd

@@ -1,0 +1,2 @@
+[console_scripts]
+lazyops-build = lazyops.libs.abc.builder:main
