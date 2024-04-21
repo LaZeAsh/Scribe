@@ -1,11 +1,16 @@
+from typing import List, Optional
+
+import sqlmodel
+
+import reflex as rx
 class addHealthPractitioner(rx.State):
-    username: str
-    email: str
+    username: str = "username1"
+    password: str = "password1"
 
     def add_healthPractitioner(self):
         with rx.session() as session:
-            hp = HealthPractitioner(username=self.username, email=self.email)
-                print(hp)
+            hp = HealthPractitioner(username=self.username, password=self.password)
+            print(hp)
             session.add(hp)
             session.commit()
 
