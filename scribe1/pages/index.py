@@ -56,7 +56,7 @@ class LoginState(rx.State):
     [doctor] for your next problem, the copd, i think you're doing great. you know, i, i don't think that you, uh, need any further referrals at this time for that. i would just continue staying away from smoking. it doesn't sound to be like you need any inhalers at this time. uh, for your third problem, your congestive heart failure, you know, i wanna continue you on the toprol, continue you on the lisinopril and we'll continue you on your current diuretic dosing of 20, lasix 20 milligrams a day.
     [doctor] i'm gonna go ahead and order that referral to g- to gastroenterology. they're the ones who will do the endoscopy and the colonoscopy, okay?
     [patient] okay.
-    [doctor] hey, dragon, order the referral to gastroenterology. so, i'll be in touch. i'm gonna stay in close contact with you over the next week or so and, uh, we'll get this all sorted out, okay?
+    [doctor] hey, dragon, order the referral to gastroenterology. so, i'll be in touch. i'm gonna stay in close contact with you over the next week or so and, uh, we'll get this all sorted out, okay?                                  
     [patient] okay.
     [doctor] all right. take care, joyce.
     [patient] thank you.
@@ -65,28 +65,30 @@ class LoginState(rx.State):
 
         """Handle the form submit."""
         self.form_data = form_data
-        scribeGenerator1=scribeGenerator
-        scribeGenerator(text_scribe)
+        # scribeGenerator1=scribeGenerator
+        # scribeGenerator(text_scribe)
         return rx.redirect("/profile/1")
     
 
 @rx.page(route="/", title="Home")
 def index() -> rx.Component:
     return rx.vstack(
-        
         rx.form(
             rx.vstack(
+                rx.heading("Scribe", align="center"),
                 rx.input(
                     placeholder="Username",
                     name="username",
+                    size="lg",
                 ),
                 rx.input(
                     placeholder="Password",
                     name="password",
+                    size="lg",
                 ),
-                rx.button("Submit", type="submit"),
+                rx.button("Submit", type="submit", size="4"),
+                align="center",
             ),
-            
             on_submit=LoginState.handle_submit,
             reset_on_submit=True,
         ),

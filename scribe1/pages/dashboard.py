@@ -127,7 +127,23 @@ def dashboard() -> rx.Component:
                                         style={"width": 360},
                                     ),
                                 ),
-                                audioIndex(),
+                                rx.popover.root(
+                                    rx.popover.trigger(
+                                        rx.button("Record a visit", variant="classic"),
+                                    ),
+                                    rx.popover.content(
+                                        rx.box(
+                                            rx.hstack(
+                                                audioIndex(),
+                                                rx.popover.close(
+                                                    rx.button("Done", size="1")
+                                                ),
+                                            ),
+                                            padding_top="12px",
+                                        ),
+                                        style={"width": 360},
+                                    ),
+                                ),
                             ),
                             rx.foreach(
                                 DynamicFormState.section4_visits,

@@ -11,21 +11,8 @@ def sidebar_header() -> rx.Component:
         The sidebar header component.
     """
     return rx.hstack(
-        # The logo.
-        # rx.color_mode_cond(
-        #     rx.image(src="/reflex_black.svg", height="2em"),
-        #     rx.image(src="/reflex_white.svg", height="2em"),
-        # ),
         rx.heading("Scribe", size='9'),
         rx.spacer(),
-        rx.link(
-            rx.button(
-                rx.icon("github"),
-                color_scheme="gray",
-                variant="soft",
-            ),
-            href="https://github.com/reflex-dev/reflex",
-        ),
         align="center",
         width="100%",
         border_bottom=styles.border,
@@ -34,28 +21,6 @@ def sidebar_header() -> rx.Component:
     )
 
 
-def sidebar_footer() -> rx.Component:
-    """Sidebar footer.
-
-    Returns:
-        The sidebar footer component.
-    """
-    return rx.hstack(
-        rx.spacer(),
-        rx.link(
-            rx.text("Docs"),
-            href="https://reflex.dev/docs/getting-started/introduction/",
-            color_scheme="gray",
-        ),
-        rx.link(
-            rx.text("Blog"),
-            href="https://reflex.dev/blog/",
-            color_scheme="gray",
-        ),
-        width="100%",
-        border_top=styles.border,
-        padding="1em",
-    )
 
 class SidebarState(rx.State):
     patients: list[dict[str, str]] = [
@@ -143,7 +108,6 @@ def sidebar() -> rx.Component:
                 padding="1em",
             ),
             rx.spacer(),
-            sidebar_footer(),
             height="100dvh",
         ),
         display=["none", "none", "block"],

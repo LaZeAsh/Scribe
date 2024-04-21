@@ -30,11 +30,8 @@ class AudioState(rx.State):
         with urlopen(strip_codec_part(chunk)) as audio_data:
             try:
                 self.processing = True
-                
-                # f.write(audio_data.read())
                 yield
-                with open("test.mp3", "wb") as f:
-                    # print(audio_data.read())
+                with open("convo_audio.mp3", "wb") as f:
                     f.write(audio_data.read())
              
             except Exception as e:
@@ -89,19 +86,10 @@ def audioIndex() -> rx.Component:
     return rx.container(
         rx.vstack(
             rx.card(
-                # rx.vstack(
-                #     f"Timeslice: {AudioState.timeslice} ms",
-                #     rx.slider(
-                #         min=0,
-                #         max=10000,
-                #         value=[AudioState.timeslice],
-                #         on_change=AudioState.set_timeslice,
-                #     ),
-                    rx.cond(
-                        capture.media_devices,
-                        input_device_select(),
-                    ),
-                # ),
+                rx.cond(
+                    capture.media_devices,
+                    input_device_select(),
+                ),
             ),
             capture,
             rx.text(f"Recorder Status: {capture.recorder_state}"),
@@ -113,18 +101,6 @@ def audioIndex() -> rx.Component:
                     on_click=capture.start(),
                 ),
             ),
-            # rx.card(
-            #     rx.text("Transcript"),
-            #     rx.divider(),
-            #     rx.foreach(
-            #         AudioState.transcript,
-            #         rx.text,
-            #     ),
-            #     rx.cond(
-            #         AudioState.processing,
-            #         rx.text("..."),
-            #     ),
-            # ),
             style={"width": "100%", "> *": {"width": "100%"}},
         ),
         size="1",

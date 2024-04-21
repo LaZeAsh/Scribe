@@ -1,6 +1,6 @@
 import reflex as rx
 class VisitFormState(rx.State):
-    visit_form_fields: list[str] = ["Symtoms","Geographic_Location", "HPI","ROS", "PE", "Constitutional", "HENT", "Eyes", "Neck", "CV", "Lungs", "GI", "MSK", "NEURO", "Hospital Course", "differental_diagnosis", "Additional"]
+    visit_form_fields: list[str] = ["Symtoms", "HPI", "PE", "Constitutional", "differental_diagnosis", "Additional"]
     form_data: dict = {}
 
     def handle_submit(self, form_data: dict):
