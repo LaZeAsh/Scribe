@@ -37,15 +37,19 @@ def index() -> rx.Component:
                     size="lg",
                 ),
                 rx.button("Submit", type="submit", size="4"),
-                align="center",
+                align="center",  # Align the contents of the vstack
             ),
             on_submit=LoginState.handle_submit,
             reset_on_submit=True,
+            align="center",  # Align the form in the parent container if possible
         ),
         rx.divider(),
         rx.heading("Results"),
-        rx.text(LoginState.form_data.to_string()),
-        )
+        rx.text(str(LoginState.form_data)),  # Ensure the dictionary is converted to string
+        align="center",  # Center align all elements if needed
+        style={"height": "100vh", "display": "flex", "alignItems": "center", "justifyContent": "center"}
+        # Use CSS-like styling if supported by the fictional 'rx' framework
+    )
         
     
 
