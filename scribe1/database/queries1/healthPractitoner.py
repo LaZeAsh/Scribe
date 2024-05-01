@@ -3,6 +3,10 @@ from typing import List, Optional
 import sqlmodel
 
 import reflex as rx
+
+from scribe1.database.models1.Patient import HealthPractitioner
+from scribe1.database.models1.Patient import Patient
+
 class addHealthPractitioner(rx.State):
     username: str = "username1"
     password: str = "password1"
@@ -21,11 +25,8 @@ class getPatients(rx.State):
 
     def get_Patients(self):
         with rx.session() as session:
-            self.healthPractitioner = session.exec(
-                HealthPractitioner.select().where(
-                    HealthPractitioner.username.contains(self.username)
-                )
-                patients = healthPractitioner[0].patients
+            self.healthPractitioner = session.exec(HealthPractitioner.select().where(HealthPractitioner.username.contains(self.username)),
+                                                   patients=self.healthPractitioner[0].patients
             ).all()
-        print("getPatients ", patients)
-        return patients
+        print("getPatients ", self.patients)
+        return self.patients

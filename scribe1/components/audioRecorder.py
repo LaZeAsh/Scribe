@@ -4,6 +4,8 @@ import reflex as rx
 
 from reflex_audio_capture import AudioRecorderPolyfill, get_codec, strip_codec_part
 
+from scribe1.components.geminiComponent import scribeGenerator
+
 REF = "myaudio"
 
 
@@ -33,7 +35,11 @@ class AudioState(rx.State):
                 yield
                 with open("convo_audio.mp3", "wb") as f:
                     f.write(audio_data.read())
-             
+                scribe_dictionary = scribeGenerator()
+                print(scribe_dictionary)
+                #TODO Populate the patient profile with the auto-generated dictionary
+
+
             except Exception as e:
                 self.has_error = True
                 yield capture.stop()

@@ -4,7 +4,9 @@ import sqlmodel
 
 import reflex as rx
 
-class Visit(rx.Model, table=True)
+from scribe1.database.models1.Patient import Patient
+
+class Visit(rx.Model, table=True):
     dayOfVisit: str
     symtoms: str
     HPI: str
@@ -14,6 +16,6 @@ class Visit(rx.Model, table=True)
     additional: str
     patientID: int = sqlmodel.Field(foreign_key="patient.id")
 
-    patient: Optional["patient"] = sqlmodel.Relationship(
+    patient: Optional[Patient] = sqlmodel.Relationship(
         back_populates="visits"
     )

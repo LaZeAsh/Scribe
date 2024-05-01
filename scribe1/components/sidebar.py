@@ -3,6 +3,7 @@
 from scribe1 import styles
 
 import reflex as rx
+from scribe1.pages.patientData import testData
 
 def sidebar_header() -> rx.Component:
     """Sidebar header.
@@ -23,15 +24,12 @@ def sidebar_header() -> rx.Component:
 
 
 class SidebarState(rx.State):
-    patients: list[dict[str, str]] = [
-        {"name": "John Eastwood", "patientID": "1"},
-        {"name": "Paul Wu", "patientID": "2"},
-        {"name": "Leena Khan", "patientID": "3"},
-    ]
-    def load_patient_info(self, patient_id: str):
-        # Placeholder: Load patient info based on patient_id
-        # This is where you'd query your data source for the patient's info
-        self.patient_name = f"Loaded info for patient {patient_id}"
+    
+    
+    patients_list: list[dict[str, str]] = [
+            {"name": f"{info[0]['patientInfo1']['firstName']} {info[0]['patientInfo1']['lastName']}", "patientID": pid}
+            for pid, info in testData.items()
+        ]
 
 
 def sidebar_item(text: str, url: str) -> rx.Component:
@@ -94,7 +92,7 @@ def sidebar() -> rx.Component:
             rx.vstack(
                
                 rx.foreach(
-                    SidebarState.patients,
+                    SidebarState.patients_list,
                     lambda patient, idx: sidebar_item(
                             text=patient["name"],
                             url="/profile/" + patient['patientID'],

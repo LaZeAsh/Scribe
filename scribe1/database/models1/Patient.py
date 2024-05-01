@@ -4,6 +4,8 @@ import sqlmodel
 
 import reflex as rx
 
+from scribe1.database.models1.Visit import Visit
+
 class Patient(rx.Model, table=True):
     firstName: str
     middleName: str
@@ -15,7 +17,7 @@ class Patient(rx.Model, table=True):
     socialSecurity: str
     age: str
     sex: str
-    alerts: [str]
+    alerts: List[str]
     healthPractitionerID: int = sqlmodel.Field(foreign_key="healthPractitioner.id")
 
     visits: List[Visit] = sqlmodel.Relationship(
@@ -24,4 +26,12 @@ class Patient(rx.Model, table=True):
 
     healthPractitioner: Optional["HealthPractitioner"] = sqlmodel.Relationship(
         back_populates="patients"
+    )
+
+class HealthPractitioner(rx.Model, table=True):
+    username: str
+    password: str
+
+    patients: List[Patient] = sqlmodel.Relationship(
+        back_populates="HealthPractitioner"
     )
